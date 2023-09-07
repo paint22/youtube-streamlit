@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Client Side</title>
+</head>
+<body>
+  <h1>Hello, Client Side!</h1>
+  <button onclick="sendToServerOnClick()">Send Data to Server</button>
+
+  <script>
+    async function sendDataToServer(data) {
+      try {
+        const response = await fetch('/sendDataToDiscord', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        return await response.json();
+      } catch (error) {
+        console.error('Error sending data to server:', error);
+        alert('データの送信中にエラーが発生しました。');
+        throw error;
+      }
+    }
+
+    // クリック時にデータをサーバーに送信する関数
+    async function sendToServerOnClick() {
+      const serverName = document.getElementById('serverInput').value.trim();
+      if (serverName === '') {
+        alert('対象のDiscordサーバー名を入力してください。');
+        return;
+      }
+
+      // データを準備
+      const data = {
+        serverName: serverName,
+        // 他のデータを追加
+      };
+
+      // サーバーにデータを送信
+      try {
+        const serverResponse = await sendDataToServer(data);
+        alert('データをサーバーに送信しました！');
+        console.log('サーバーからのレスポンス:', serverResponse);
+      } catch (error) {
+        console.error('Error sending data to server:', error);
+        alert('データの送信中にエラーが発生しました。');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>簡単なWebページ</title>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 5px;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav li {
+            margin-right: 20px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        nav li:hover {
+            background-color: red;
+            transform: translateY(-5px);
+        }
+
+        nav li:last-child {
+            margin-right: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #444;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+
+
+     <script>
+        // JavaScriptのコード
+        document.addEventListener("DOMContentLoaded", function() {
+            // キャラ選択を取得
+            const APEXキャラ選択Link = document.querySelector("nav li:first-child a");
+             // 問い合わせリンクを取得
+             const 問い合わせLink = document.querySelector("nav li:nth-child(2) a");
+
+            // キャラ選択をクリックしたときの処理
+            APEXキャラ選択Link.addEventListener("click", function(event) {
+                event.preventDefault(); // デフォルトのリンク動作をキャンセル
+                window.location.href = "APEXキャラ選択.html"; // APEX.htmlに遷移
+            });
+
+             // 問い合わせリンクをクリックしたときの処理
+             問い合わせLink.addEventListener("click", function(event) {
+                event.preventDefault(); // デフォルトのリンク動作をキャンセル
+                window.location.href = "問い合わせ.html"; // 問い合わせ.htmlに遷移
+            });
+        });
+    </script>
+
+
+</head>
+<body>
+    <header>
+        <h1>APEX</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">キャラクター選択</a></li>
+            <li><a href="#">お問い合わせ</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2><a href="APEXキャラ選択.html">キャラクター選択</a></h2>
+            <p>APEXというゲームのキャラクターをランダムに選択することが可能です。</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2023 簡単なWebページ制作</p>
+    </footer>
+</body>
+</html>
