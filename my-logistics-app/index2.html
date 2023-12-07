@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>物流管理システム</title>
+    <style>
+        /* テーブルの境界線スタイルを設定 */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>物流管理システム</h1>
+    
+    <!-- 発注リストを表示するためのテーブル -->
+    <h2>発注予約一覧</h2>
+    <table id="order-table">
+        <thead>
+            <tr>
+                <th>商品コード</th>
+                <th>商品名</th>
+                <th>数量</th>
+                <th>発注日</th>
+                <th>出庫確認</th>
+                <th>出発地点</th>
+                <th>運送責任者</th>
+                <th>入庫確認</th>
+                <th>受取地点</th>
+                <th>受取サイン</th>
+            </tr>
+        </thead>
+        <tbody id="order-table-body">
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order[0] }}</td>
+                    <td>{{ order[1] }}</td>
+                    <td>{{ order[2] }}</td>
+                    <td>{{ order[3] }}</td>
+                    <td>{{ order[4] }}</td>
+                    <td>{{ order[5] }}</td>
+                    <td>{{ order[6] }}</td>
+                    <td>{{ order[7] }}</td>
+                    <td>{{ order[8] }}</td>
+                    <td>{{ order[9] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- JavaScriptファイルを読み込む -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

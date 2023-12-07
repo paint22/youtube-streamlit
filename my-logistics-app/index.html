@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>スーパー発注システム</title>
+    <style>
+        /* スタイル設定 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>スーパー発注システム</h1>
+    <p>材料名または材料コードを検索して選択し、数量を指定して発注できます。</p>
+    
+    <label for="material-search">材料名または材料コード検索:</label>
+    <input type="text" id="material-search" name="material-search" oninput="searchMaterial()">
+    
+    <label for="quantity">数量:</label>
+    <input type="number" id="quantity" name="quantity" min="1">
+    
+    <!-- 発注リストを表示するためのテーブルを追加 -->
+    <h2>発注リスト</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>材料コード</th>
+                <th>材料名</th>
+                <th>数量</th>
+            </tr>
+        </thead>
+        <tbody id="order-list">
+            <!-- 発注リストがここに表示されます -->
+        </tbody>
+    </table>
+    
+    <!-- ボタンを追加 -->
+    <button id="add-order-button">発注追加</button>
+    <button id="clear-order-button">発注リストをクリア</button>
+    <button id="save-order-button">発注リストを保存</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

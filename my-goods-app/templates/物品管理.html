@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title>物品管理</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0074d9;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            border: 1px solid #dddddd;
+        }
+
+        /* 編集中のセルのスタイル */
+        .editing {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>物品管理</h1>
+    <button id="addItemButton">備品登録</button>
+
+    <!-- 登録フォーム -->
+    <div id="addItemForm" style="display: none;">
+        <h2>物品登録フォーム</h2>
+        <form id="itemForm" action="/api/add_item" method="POST" enctype="multipart/form-data">
+            <label for="物品名">物品名:</label>
+        <input type="text" id="物品名" name="物品名"><br><br>
+
+        <label for="コード">コード:</label>
+        <input type="text" id="コード" name="コード"><br><br>
+
+        <label for="保管場所">保管場所 (部屋番号):</label>
+        <input type="number" id="保管場所" name="保管場所"><br><br>
+
+        <label for="数量">数量:</label>
+        <input type="number" id="数量" name="数量"><br><br>
+
+        <label for="購入日">購入日:</label>
+        <input type="date" id="購入日" name="購入日"><br><br>
+
+        <label for="状態">状態:</label>
+        <select id="状態" name="状態">
+            <option value="仮">仮</option>
+            <option value="◯">◯</option>
+            <option value="△">△</option>
+            <option value="✕">✕</option>
+        </select><br><br>
+
+        <label for="管理責任者">管理責任者:</label>
+        <input type="number" id="管理責任者" name="管理責任者"><br><br>
+
+        <label for="規格">規格:</label>
+        <input type="text" id="規格" name="規格"><br><br>
+
+        <label for="製造番号">製造番号:</label>
+        <input type="number" id="製造番号" name="製造番号"><br><br>
+
+        <label for="製造先">製造先:</label>
+        <input type="number" id="製造先" name="製造先"><br><br>
+
+        <label for="単価">単価:</label>
+        <input type="number" id="単価" name="単価"><br><br>
+
+        <label for="金額">金額:</label>
+        <input type="text" id="金額" name="金額"><br><br>
+
+        <label for="納入日">納入日:</label>
+        <input type="date" id="納入日" name="納入日"><br><br>
+
+        <label for="支払日">支払日:</label>
+        <input type="date" id="支払日" name="支払日"><br><br>
+
+        <label for="購入先">購入先:</label>
+        <input type="text" id="購入先" name="購入先"><br><br>
+
+        <label for="所属">所属:</label>
+        <input type="text" id="所属" name="所属"><br><br>
+
+        <label for="前所属">前所属:</label>
+        <input type="text" id="前所属" name="前所属"><br><br>
+
+        <label for="前任者">前任者:</label>
+        <input type="number" id="前任者" name="前任者"><br><br>
+
+        <label for="整理番号">整理番号:</label>
+        <input type="number" id="整理番号" name="整理番号"><br><br>
+
+        <label for="ST数量">ST数量:</label>
+        <input type="number" id="ST数量" name="ST数量"><br><br>
+
+        <!-- 新しいファイルアップロードフィールドを追加 -->
+        <label for="写真">写真:</label>
+        <input type="file" id="写真" name="写真"><br><br>
+
+
+        <!-- 登録ボタン -->
+        <button type="submit" id="registerButton">登録</button>
+        </form>
+    </div>
+
+    <!-- 検索フォーム -->
+    <div>
+        <label for="searchField">検索対象:</label>
+        <select id="searchField">
+            <option value="物品名">物品名</option>
+            <option value="保管場所">保管場所</option>
+            <option value="状態">状態</option>
+            <option value="管理責任者">管理責任者</option>
+            <option value="整理番号">整理番号</option>
+            <option value="規格">規格</option>
+            <option value="製造番号">製造番号</option>
+            <option value="製造元">製造元</option>
+            <option value="購入先">購入先</option>
+            <option value="所属">所属</option>
+        </select>
+
+        <input type="text" id="searchText" placeholder="検索ワード">
+        <button class="addSearchField">+</button>
+        <button id="searchButton">検索</button>
+    </div>
+
+    <!-- 物品一覧テーブル -->
+    <table id="itemTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>購入日</th>
+                <th>コード</th>
+                <th>整理番号</th>
+                <th>ST数量</th>
+                <th>物品名</th>
+                <th>規格</th>
+                <th>製造番号</th>
+                <th>製造先</th>
+                <th>数量</th>
+                <th>保管場所</th>
+                <th>単価</th>
+                <th>金額</th>
+                <th>納入日</th>
+                <th>支払日</th>
+                <th>購入先</th>
+                <th>所属</th>
+                <th>前所属</th>
+                <th>管理責任者</th>
+                <th>前任者</th>
+                <th>状態</th>
+                <th>写真</th>
+                <th>QRコード</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 物品データはここに動的に追加されます -->
+            {% for item in items %}
+                <tr>
+                    <!-- テーブルのデータセル -->
+                    <td>{{ item['ID'] }}</td>
+                    <td>{{ item['購入日'] }}</td>
+                    <td>{{ item['コード'] }}</td>
+                    <td>{{ item['整理番号'] }}</td>
+                    <td>{{ item['ST数量'] }}</td>
+                    <td>{{ item['物品名'] }}</td>
+                    <td>{{ item['規格'] }}</td>
+                    <td>{{ item['製造番号'] }}</td>
+                    <td>{{ item['製造先'] }}</td>
+                    <td>{{ item['保管場所'] }}</td>
+                    <td>{{ item['単価'] }}</td>
+                    <td>{{ item['金額'] }}</td>
+                    <td>{{ item['納入日'] }}</td>
+                    <td>{{ item['支払日'] }}</td>
+                    <td>{{ item['購入先'] }}</td>
+                    <td>{{ item['所属'] }}</td>
+                    <td>{{ item['前所属'] }}</td>
+                    <td>{{ item['管理責任者'] }}</td>
+                    <td>{{ item['前任者'] }}</td>
+                    <td>{{ item['状態'] }}</td>
+                    <td>
+                        <!-- 写真を表示する要素 -->
+                    <div id="photoContainer_{{ item['ID'] }}"></div>
+                        {% if item['写真'] %}
+                        <a href="/api/get_photo/{{ item['ID'] }}/photo" target="_blank">{{ item['写真'] }}</a>
+    {% else %}
+                            なし
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item['QRコード'] %}
+                    <a href="/api/get_qrcode/{{ item['ID'] }}" target="_blank">{{ item['QRコード'] }}</a>
+{% else %}
+                            なし
+                        {% endif %}
+                    </td>
+                    <td>操作ボタンを追加</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <!-- 編集フォーム -->
+    <div id="editForm" style="display: none;">
+        <h2>物品を編集</h2>
+        <form id="editItemForm">
+            <!-- 編集フォームの内容をここに追加 -->
+            <input type="submit" value="保存">
+            <button type="button" id="cancelButton">キャンセル</button>
+        </form>
+    </div>
+
+    <!-- JavaScriptファイルを読み込む -->
+    <script src="/static/物品管理.js"></script>
+</body>
+</html>

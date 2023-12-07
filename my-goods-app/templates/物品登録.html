@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>物品管理システム</title>
+</head>
+<body>
+    <h1>物品登録フォーム</h1>
+    <form id="itemForm" action="/api/add_item" method="POST" enctype="multipart/form-data">
+        <label for="物品名">物品名:</label>
+        <input type="text" id="物品名" name="物品名"><br><br>
+
+        <label for="コード">コード:</label>
+        <input type="text" id="コード" name="コード"><br><br>
+
+        <label for="保管場所">保管場所 (部屋番号):</label>
+        <input type="number" id="保管場所" name="保管場所"><br><br>
+
+        <label for="数量">数量:</label>
+        <input type="number" id="数量" name="数量"><br><br>
+
+        <label for="購入日">購入日:</label>
+        <input type="date" id="購入日" name="購入日"><br><br>
+
+        <label for="状態">状態:</label>
+        <select id="状態" name="状態">
+            <option value="仮">仮</option>
+            <option value="◯">◯</option>
+            <option value="△">△</option>
+            <option value="✕">✕</option>
+        </select><br><br>
+
+        <label for="管理責任者">管理責任者:</label>
+        <input type="number" id="管理責任者" name="管理責任者"><br><br>
+
+        <label for="規格">規格:</label>
+        <input type="text" id="規格" name="規格"><br><br>
+
+        <label for="製造番号">製造番号:</label>
+        <input type="number" id="製造番号" name="製造番号"><br><br>
+
+        <label for="製造先">製造先:</label>
+        <input type="number" id="製造先" name="製造先"><br><br>
+
+        <label for="単価">単価:</label>
+        <input type="number" id="単価" name="単価"><br><br>
+
+        <label for="金額">金額:</label>
+        <input type="text" id="金額" name="金額"><br><br>
+
+        <label for="納入日">納入日:</label>
+        <input type="date" id="納入日" name="納入日"><br><br>
+
+        <label for="支払日">支払日:</label>
+        <input type="date" id="支払日" name="支払日"><br><br>
+
+        <label for="購入先">購入先:</label>
+        <input type="text" id="購入先" name="購入先"><br><br>
+
+        <label for="所属">所属:</label>
+        <input type="text" id="所属" name="所属"><br><br>
+
+        <label for="前所属">前所属:</label>
+        <input type="text" id="前所属" name="前所属"><br><br>
+
+        <label for="前任者">前任者:</label>
+        <input type="number" id="前任者" name="前任者"><br><br>
+
+        <label for="整理番号">整理番号:</label>
+        <input type="number" id="整理番号" name="整理番号"><br><br>
+
+        <label for="ST数量">ST数量:</label>
+        <input type="number" id="ST数量" name="ST数量"><br><br>
+
+        <!-- 新しいファイルアップロードフィールドを追加 -->
+        <label for="写真">写真:</label>
+        <input type="file" id="写真" name="写真"><br><br>
+
+        <!-- カメラ制御と写真の撮影用の要素 -->
+        <div id="cameraContainer">
+            <button type="button" id="openCamera">カメラを開く</button>
+            <video id="camera" width="640" height="480" style="display:none;"></video>
+            <canvas id="canvas" style="display:none;"></canvas>
+            <button type="button" id="takePhoto" style="display:none;">撮影</button>
+            <button type="button" id="cancelCamera" style="display:none;">キャンセル</button>
+            <button type="button" id="confirmPhoto" style="display:none;">確認</button>
+            <button type="button" id="retakePhoto" style="display:none;">撮り直し</button>
+        </div>
+        <img id="capturedPhoto" style="display: none; max-width: 100%;" src="" alt="Captured Photo">
+        <input type="hidden" id="photo" name="photo">
+
+        <!-- 登録ボタン -->
+        <button type="submit" id="registerButton">登録</button>
+    </form>
+
+    <div id="displayArea">
+        <!-- 登録された物品を表示する部分 -->
+    </div>
+
+    <script src="{{ url_for('static', filename='物品登録.js') }}"></script>
+</body>
+</html>
+

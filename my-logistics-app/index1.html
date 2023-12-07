@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>物流管理システム</title>
+    <style>
+        /* スタイル設定 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        /* QRコードカラムのスタイル */
+        .qrcode-column {
+            border-right: none; /* 右側のボーダーを非表示にする */
+        }
+    </style>
+</head>
+<body>
+    <h1>物流管理システム</h1>
+    
+    <!-- 発注リストを表示するためのテーブル -->
+    <h2>発注予約一覧</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>材料コード</th>
+                <th>材料名</th>
+                <th>数量</th>
+                <th class="qrcode-column">QRコード</th> <!-- 新しいQRコードカラム -->
+            </tr>
+        </thead>
+        <tbody id="order-list">
+            <!-- 発注予約一覧がここに表示されます -->
+        </tbody>
+    </table>
+
+    <!-- QRコード生成ボタン -->
+    <h2>QRコード生成</h2>
+    <button type="button" id="generate-qrcode">QRコード生成</button>
+
+    <!-- スクリプトライブラリの読み込み -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    <!-- JavaScriptファイルを読み込む -->
+    <script src="script.js"></script>
+</body>
+</html>
